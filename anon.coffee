@@ -6,6 +6,7 @@ Twit          = require 'twit'
 minimist      = require 'minimist'
 Mustache      = require 'mustache'
 {WikiChanges} = require 'wikichanges'
+logentries    = require 'le_node'
 
 argv = minimist process.argv.slice(2), default:
   verbose: false
@@ -114,8 +115,10 @@ inspect = (account, edit) ->
           if Math.abs(edit.delta) >= account.delta
             tweet account, status, edit
             console.log "Status: send"
+            log.info account.name + " " + edit.delta + " send [" + status + "]"
           else
             console.log "Status: ignored"
+            log.info account.name + " " + edit.delta + " ignored [" + status + "]"
 
 checkConfig = (config, error) ->
   if config.accounts
@@ -142,6 +145,9 @@ main = ->
   config = getConfig argv.config
   checkConfig config, (err) ->
     if not err
+      log = logentries.logger({ token: config.logentries_token })
+      for account in config.accounts
+        log.warning 'start watching "' + account.name + '"'
       wikipedia = new WikiChanges ircNickname: config.nick
       wikipedia.listen (edit) ->
         for account in config.accounts

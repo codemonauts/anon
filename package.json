@@ -11,7 +11,8 @@
     "coffee-script": "1.8.x",
     "minimist": "1.1.x",
     "mustache": "0.8.x",
-    "ipv6": "3.x.x"
+    "ipv6": "3.x.x",
+    "le_node": "*"
   },
   "devDependencies": {
     "mocha": "latest",

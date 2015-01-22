@@ -20,6 +20,7 @@
           "156.33.0.0/16"
         ]
       },
+      "delta": 10,
       "throttle": false,
       "namespaces": ["article", "file", "media", "main"],
       "whitelist": {
@@ -33,5 +34,3 @@
     }
   ]
 }
-
-

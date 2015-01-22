@@ -89,7 +89,6 @@ isRepeat = (edit) ->
   return r
 
 tweet = (account, status, edit) ->
-  console.log status
   unless argv.noop or (account.throttle and isRepeat(edit))
     twitter = new Twit account
     twitter.post 'statuses/update', status: status, (err) ->
@@ -109,7 +108,14 @@ inspect = (account, edit) ->
       for name, ranges of account.ranges
         if isIpInAnyRange edit.user, ranges
           status = getStatus edit, name, account.template
-          tweet account, status, edit
+          console.log "Service: " + account.name
+          console.log "Delta: " + edit.delta
+          console.log "Tweet: " + status
+          if Math.abs(edit.delta) >= account.delta
+            tweet account, status, edit
+            console.log "Status: send"
+          else
+            console.log "Status: ignored"
 
 checkConfig = (config, error) ->
   if config.accounts

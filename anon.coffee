@@ -141,13 +141,18 @@ canTweet = (account, error) ->
   catch err
     error "unable to create twitter client for account: " + account
 
+log = (level, logline) ->
+  token = (exports ? this).le_token
+  log = logentries.logger({ token: token })
+  log.log level, logline
+
 main = ->
   config = getConfig argv.config
+  (exports ? this).le_token = config.logentries_token
   checkConfig config, (err) ->
     if not err
-      log = logentries.logger({ token: config.logentries_token })
       for account in config.accounts
-        log.warning 'start watching "' + account.name + '"'
+        log 'warning', 'start watching "' + account.name + '"'
       wikipedia = new WikiChanges ircNickname: config.nick
       wikipedia.listen (edit) ->
         for account in config.accounts

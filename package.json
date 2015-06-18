@@ -12,7 +12,7 @@
     "minimist": "1.1.x",
     "mustache": "0.8.x",
     "ipv6": "3.x.x",
-    "le_node": "<=1.0"
+    "le_node": "<1.0"
   },
   "devDependencies": {
     "mocha": "latest",

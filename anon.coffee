@@ -113,9 +113,13 @@ inspect = (account, edit) ->
           console.log "Delta: " + edit.delta
           console.log "Tweet: " + status
           if Math.abs(edit.delta) >= account.delta
-            tweet account, status, edit
-            console.log "Status: send"
-            log.info account.name + " " + edit.delta + " send [" + status + "]"
+            if name != "der Bundeswehr" and edit.wikipedia != "Wikidata"
+              tweet account, status, edit
+              console.log "Status: send"
+              log.info account.name + " " + edit.delta + " send [" + status + "]"
+            else
+              console.log "Status: filtered"
+              log.info account.name + " " + edit.delta + " filtered [" + status + "]"
           else
             console.log "Status: ignored"
             log.info account.name + " " + edit.delta + " ignored [" + status + "]"

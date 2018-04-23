@@ -8,6 +8,8 @@
     "async": "0.9.x",
     "twit": "1.1.x",
     "wikichanges": ">=0.2.7",
+	"irc" : "=0.3.12",
+	"irc-colors": "=1.2.0",
     "coffee-script": "1.8.x",
     "minimist": "1.1.x",
     "mustache": "0.8.x",
